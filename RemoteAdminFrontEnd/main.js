@@ -1,7 +1,7 @@
-SERVERIP = '10.24.25.67:8080';
+SERVERIP = '10.24.25.130:8000';
 $(document).ready(function(){
     $("#mainnavbutton").click(function(){
-        $.getJSON("http://"+SERVERIP+"/connection", function(result){
+        $.getJSON("http://"+SERVERIP+"/logserver/connection", function(result){
 			$("#main").html('<ul>');
 			$("#stattxt").text('List of duplicate logs received.');
 			$.each( result, function( key, val ) {
@@ -16,7 +16,7 @@ $(document).ready(function(){
 				$(this).addClass( "selected" );
 				$("#exusername").val(username);
 				$("#exnav").removeClass('hidden');
-				$.getJSON("http://"+SERVERIP+":8000/get_log?username="+username+"&compname=all", function(result){
+				$.getJSON("http://"+SERVERIP+"/get_log?username="+username+"&compname=all", function(result){
 					$("#logview").html("");
 					$("#logview").append("<table>");
 					$("#stattxt").text('Log for user '+username+' received.');
