@@ -44,6 +44,6 @@ def connection(hug_cors):
 					if(row[1] == 200):
 						thisstat = "Yield"
 					if(row[1] != 200):
-						thisstat = "Down"
+						thisstat = "Bad"
 			logs[thistitle] = thisstat
 	return logs
