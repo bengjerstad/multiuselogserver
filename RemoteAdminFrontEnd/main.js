@@ -6,7 +6,7 @@ $(document).ready(function(){
 			$("#stattxt").text('List of duplicate logs received.');
 			$.each( result, function( key, val ) {
 				username = key.split(" ")[0];
-				link = "<a href='#' class='dupitem'>"+username+ "</a>"
+				link = "<a href='#' ><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 				$("#main").append("<li>"+link+"</li>");
 			});
 			$("#main").append("</ul>");
