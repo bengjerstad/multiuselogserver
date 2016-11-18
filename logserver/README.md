@@ -14,7 +14,7 @@
 
   Run:
   ```
-  hug -f 'home/admin/myapiwithdb.py'
+  hug -f 'home/admin/__init__.py'
   
   ```
   Test:
