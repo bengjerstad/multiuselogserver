@@ -39,11 +39,11 @@ def connection(hug_cors):
 		for idx,row in enumerate(dbout):
 			if(thistitle == row[0]):
 				if(row[1] != laststat):
-					print(row[1],laststat)
+					#print(thistitle,laststat,row[1])
 					laststat = row[1]
-					if(row[1] == 200):
+					if(row[1] == str(200)):
 						thisstat = "Yield"
-					if(row[1] != 200):
+					if(row[1] != str(200)):
 						thisstat = "Bad"
 			logs[thistitle] = thisstat
 	return logs
