@@ -26,7 +26,7 @@ def load(hug_cors):
 	
 @hug.get(examples='')
 @hug.local()
-def connection():
+def connection(hug_cors):
 	logs = {}
 	dbkeys = ['title','stat']
 	sqlcmd = "SELECT `title`,`stat` FROM ConnectLog WHERE 1"
