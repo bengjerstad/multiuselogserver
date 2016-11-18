@@ -33,7 +33,7 @@ The design goal is to use the same server that is running windowslogonofflogger,
 
   Run:
   ```
-  hug -f 'home/admin/runlogserver.py'
+  hug -f 'home/admin/__init__.py'
   
   ```
   Test:
