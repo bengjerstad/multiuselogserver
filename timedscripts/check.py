@@ -18,7 +18,12 @@ for sites in data['websites']['site']:
 	#print(sites)
 	print(sites['-title'])
 	#HTTP request for the code.
-	r = requests.get(sites['-address'])
+	try:
+		r = requests.get(sites['-address'])
+		stat = str(r.status_code)
+	except:
+		print('Connection Error')
+		stat = '300'
 	if(sites['-hashdiff'] == 'true'):
 		hash = hashlib.md5(r.text.encode('utf-8')).hexdigest()
 	else:
@@ -29,7 +34,7 @@ for sites in data['websites']['site']:
 	else:
 		hash = str(None)
 		
-	sqlcmd = "INSERT INTO ConnectLog VALUES ('"+sites['-title']+"','"+now+"',"+str(r.status_code)+",'"+hash+"')"
+	sqlcmd = "INSERT INTO ConnectLog VALUES ('"+sites['-title']+"','"+now+"',"+stat+",'"+hash+"')"
 	try:
 		print(sqlcmd)
 		c.execute(sqlcmd)
