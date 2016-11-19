@@ -11,7 +11,7 @@ This project is broken up into 3 parts:
 The server is a hug server: http://www.hug.rest/ 
 The hug server exposes a RESTFUL API and allows the logging and data analysis to take place in python3. 
 The python code pushes and pulls from a sqlite3 database file. 
-The design goal is to use the same server that is running windowslogonofflogger, except a diffent port number.
+The design goal is to use the same server that is running windowslogonofflogger.
 
 3. An HTML/javascript front end to get the data from the server to the admin. 
 
@@ -36,12 +36,4 @@ The design goal is to use the same server that is running windowslogonofflogger,
   hug -f 'home/admin/__init__.py'
   
   ```
-  Test:
-  
-  To test logging, open up a browser and enter:
-  
-  http://[SERVER_IPADDRESS]:8000/log_this?username=bgjerstad&compname=011acboe&stat=on&time=2016-10-20_0229PM
-  
-  To test getting the logs out of the server, in the browser enter:
-  
-  http://[SERVER_IPADDRESS]:8000/get_log?username=bgjerstad&compname=011acboe
+ 
