@@ -72,3 +72,16 @@ def hashlist(hug_cors):
 						thisstat = "Good"
 					logs[thistitle] = thisstat
 	return logs
+
+@hug.get(examples='')
+@hug.local()
+def rolluplist(hug_cors):
+	logs = {}
+	with open('config.json', encoding='utf-8') as data_file:
+		data = json.loads(data_file.read())
+
+	for rollups in data['rollupscripts']['scripts']:
+		thistitle = rollups['-title']
+		logs[thistitle] = 'Good'
+	return logs
+	
