@@ -23,9 +23,22 @@ function hashlist(){
 		$("#main").append("</ul>");
 	});
 }
+function rolluplist(){
+	$.getJSON("http://"+SERVERIP+"/logserver/rolluplist", function(result){
+		$("#exlist").html("");
+		$("#stattxt").text('List of rollups received.');
+		$.each( result, function( key, val ) {
+			username = key.split(" ")[0];
+			link = "<a href='#' >"+username+ "</a>"
+			$("#exlist").append("<li>"+link+"</li>");
+		});
+		$("#exlist").append("</ul>");
+	});
+}
 	
 
 getconnection();
 hashlist();
+rolluplist();
 setInterval(getconnection,3600000);
 setInterval(hashlist,3600000);
