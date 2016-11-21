@@ -1,0 +1,26 @@
+{
+  "websites": {
+    "site": [
+      {
+        "-title": "IntranetRBT",
+        "-address": "http://10.24.17.101/RBT",
+        "-hashdiff": "false",
+        "-logdiff": "false"
+      },
+      {
+        "-title": "windowslogger",
+        "-address": "http://10.24.25.130:8000/get_dup",
+        "-hashdiff": "true",
+        "-logdiff": "true"
+      }
+    ]
+  },"rollupscripts": {
+		"scripts": [
+		{
+			"-title": "WindowsLogger",
+			"-script": "rollupwinlog",
+			"-dbfile": "usersrollup.db"
+		}
+		]
+	}
+}
