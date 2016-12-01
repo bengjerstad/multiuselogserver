@@ -6,7 +6,8 @@ function getconnection(){
 		$("#stattxt").text('List of connections received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			link = "<a href='#' ><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
+			thisview = "connview";
+			link = "<a href='#' onclick='view(thisview)'><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 			$("#main").append("<li>"+link+"</li>");
 		});
 		$("#main").append("</ul>");
@@ -17,7 +18,8 @@ function hashlist(){
 		$("#stattxt").text('List of hash received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			link = "<a href='#' ><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
+			thisview = "hashview";
+			link = "<a href='#' onclick='view(thisview)'><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 			$("#main").append("<li>"+link+"</li>");
 		});
 		$("#main").append("</ul>");
@@ -33,6 +35,18 @@ function rolluplist(){
 			$("#exlist").append("<li>"+link+"</li>");
 		});
 		$("#exlist").append("</ul>");
+	});
+}
+function view(viewtype){
+	$.getJSON("http://"+SERVERIP+"/logserver/"+viewtype+"", function(result){
+		$("#logview").html("");
+		$("#stattxt").text('Log View received.');
+		$.each( result, function( key, val ) {
+			username = key.split(" ")[0];
+			link = "<a href='#' >"+val+ "</a>"
+			$("#logview").append("<li>"+link+"</li>");
+		});
+		$("#logview").append("</ul>");
 	});
 }
 	
