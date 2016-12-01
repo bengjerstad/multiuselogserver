@@ -18,8 +18,7 @@ function hashlist(){
 		$("#stattxt").text('List of hash received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			thisview = "hashview";
-			link = "<a href='#' onclick='view(thisview)'><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
+			link = "<a href='#' onclick=\"view('hashview')\"><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 			$("#main").append("<li>"+link+"</li>");
 		});
 		$("#main").append("</ul>");
@@ -41,15 +40,21 @@ function view(viewtype){
 	$.getJSON("http://"+SERVERIP+"/logserver/"+viewtype+"", function(result){
 		$("#logview").html("");
 		$("#stattxt").text('Log View received.');
+		link = "<a href='#' onclick=\"clearlog('"+viewtype+"')\">Clear This Log</a>"
+		$("#logview").append("<li>"+link+"</li>");
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			link = "<a href='#' >"+val+ "</a>"
-			$("#logview").append("<li>"+link+"</li>");
+			$("#logview").append("<li>"+val+"</li>");
 		});
 		$("#logview").append("</ul>");
 	});
 }
-	
+function clearlog(view){
+	$.getJSON("http://"+SERVERIP+"/logserver/clearthis?view="+view, function(result){
+		$("#logview").html("");
+		$("#stattxt").text('Cleared the Log.');
+	});
+}
 
 getconnection();
 hashlist();
