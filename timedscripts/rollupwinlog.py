@@ -36,7 +36,5 @@ else:
 				makedb()
 				c.execute("INSERT INTO users VALUES "+str(data2))
 			conn.commit()
-
-#need to request to clear the log
-#r = requests.get('http://'+SERVER+'/db?action=clearlog')
+	r = requests.get('http://'+SERVER+'/db?action=clearlog')
 
