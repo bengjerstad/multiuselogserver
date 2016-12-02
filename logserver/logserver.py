@@ -72,21 +72,8 @@ def hashlist(hug_cors,type: hug.types.text):
 							laststat = row[1]
 							thisstat = "Good"
 						logs[thistitle] = thisstat
-	return logs
-	
-@hug.get(examples='')
-@hug.local()
-def hashview(hug_cors):
-	logs = {}
-	dbkeys = ['title','hash']
-	sqlcmd = "SELECT `title`,`hash` FROM ConnectLog WHERE 1"
-	dbout = c.execute(sqlcmd)
-	dbout = dbout.fetchall()
-	titles = {x[0] for x in dbout}
-	for thistitle in titles:
-		for idx,row in enumerate(dbout):
-			if(row[1] != "None"):
-				logs[idx] = row[1]
+				if(type == 'view'):
+					logs[idx] = row[1]
 	return logs
 
 @hug.get(examples='')
