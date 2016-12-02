@@ -6,8 +6,7 @@ function getconnection(){
 		$("#stattxt").text('List of connections received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			thisview = "connview";
-			link = "<a href='#' onclick='view(thisview)'><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
+			link = "<a href='#' onclick=\"view('connection')\"><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 			$("#main").append("<li>"+link+"</li>");
 		});
 		$("#main").append("</ul>");
@@ -18,7 +17,7 @@ function hashlist(){
 		$("#stattxt").text('List of hash received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			link = "<a href='#' onclick=\"view('hashview')\"><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
+			link = "<a href='#' onclick=\"view('hashlist')\"><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 			$("#main").append("<li>"+link+"</li>");
 		});
 		$("#main").append("</ul>");
@@ -37,7 +36,7 @@ function rolluplist(){
 	});
 }
 function view(viewtype){
-	$.getJSON("http://"+SERVERIP+"/logserver/hashlist?type=view", function(result){
+	$.getJSON("http://"+SERVERIP+"/logserver/"+viewtype+"?type=view", function(result){
 		$("#logview").html("");
 		$("#stattxt").text('Log View received.');
 		link = "<a href='#' onclick=\"clearlog('"+viewtype+"')\">Clear This Log</a>"
