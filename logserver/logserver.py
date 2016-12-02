@@ -24,12 +24,12 @@ def load(hug_cors):
 		logs[idx] = dict(zip(dbkeys,row))
 	return logs
 	
-@hug.get(examples='')
+@hug.get(examples='type=list&title=all')
 @hug.local()
-def connection(hug_cors):
+def connection(hug_cors,type: hug.types.text,title: hug.types.text):
 	logs = {}
 	dbkeys = ['title','stat']
-	sqlcmd = "SELECT `title`,`stat` FROM ConnectLog WHERE 1"
+	sqlcmd = "SELECT `title`,`stat`,`time` FROM ConnectLog WHERE 1"
 	dbout = c.execute(sqlcmd)
 	dbout = dbout.fetchall()
 	titles = {x[0] for x in dbout}
@@ -38,14 +38,18 @@ def connection(hug_cors):
 		thisstat = "Good"
 		for idx,row in enumerate(dbout):
 			if(thistitle == row[0]):
-				if(row[1] != laststat):
-					#print(thistitle,laststat,row[1])
-					laststat = row[1]
-					if(row[1] == str(200)):
-						thisstat = "Yield"
-					if(row[1] != str(200)):
-						thisstat = "Bad"
-			logs[thistitle] = thisstat
+				if(type == 'list'):
+					if(row[1] != laststat):
+						#print(thistitle,laststat,row[1])
+						laststat = row[1]
+						if(row[1] == str(200)):
+							thisstat = "Yield"
+						if(row[1] != str(200)):
+							thisstat = "Bad"
+					logs[thistitle] = thisstat
+				if(type == 'view'):
+					if(row[0] == title):
+						logs[idx] = row[0],row[1],row[2]
 	return logs
 	
 @hug.get(examples='type=list')
