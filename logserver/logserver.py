@@ -98,5 +98,8 @@ def clearthis(hug_cors,title: hug.types.text):
 	sqlcmd = "DELETE FROM ConnectLog WHERE title = '"+title+"'"
 	print(sqlcmd)
 	dbout = c.execute(sqlcmd)
+	conn.commit()
+
+	
 	return 1
 	
