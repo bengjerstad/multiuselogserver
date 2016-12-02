@@ -39,7 +39,7 @@ function view(viewtype,title){
 	$.getJSON("http://"+SERVERIP+"/logserver/"+viewtype+"?type=view&title="+title, function(result){
 		$("#logview").html("");
 		$("#stattxt").text('Log View received.');
-		link = "<a href='#' onclick=\"clearlog('"+viewtype+"')\">Clear This Log</a>"
+		link = "<a href='#' onclick=\"clearlog('"+title+"')\">Clear This Log</a>"
 		$("#logview").append("<li>"+link+"</li>");
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
@@ -49,7 +49,7 @@ function view(viewtype,title){
 	});
 }
 function clearlog(view){
-	$.getJSON("http://"+SERVERIP+"/logserver/clearthis?view="+view, function(result){
+	$.getJSON("http://"+SERVERIP+"/logserver/clearthis?title="+view, function(result){
 		$("#logview").html("");
 		$("#stattxt").text('Cleared the Log.');
 	});
