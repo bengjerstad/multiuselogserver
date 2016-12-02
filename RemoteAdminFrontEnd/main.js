@@ -14,7 +14,7 @@ function getconnection(){
 	});
 }
 function hashlist(){
-	$.getJSON("http://"+SERVERIP+"/logserver/hashlist", function(result){
+	$.getJSON("http://"+SERVERIP+"/logserver/hashlist?type=list", function(result){
 		$("#stattxt").text('List of hash received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
