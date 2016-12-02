@@ -1,7 +1,7 @@
 SERVERIP = '10.24.25.130:8000';
 
 function getconnection(){
-	$.getJSON("http://"+SERVERIP+"/logserver/connection", function(result){
+	$.getJSON("http://"+SERVERIP+"/logserver/connection?type=list", function(result){
 		$("#main").html('<ul>');
 		$("#stattxt").text('List of connections received.');
 		$.each( result, function( key, val ) {
