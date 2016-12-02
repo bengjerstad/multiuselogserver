@@ -3,6 +3,8 @@ import requests
 import hashlib
 import sqlite3
 import datetime
+import os
+path = os.path.dirname(os.path.abspath(__file__))
 conn = sqlite3.connect('check.db')
 c = conn.cursor()
 
@@ -11,7 +13,7 @@ def makedb():
 	conn.commit()
 	
 now = str(datetime.datetime.now())
-with open('config.json', encoding='utf-8') as data_file:
+with open(path+'/config.json', encoding='utf-8') as data_file:
     data = json.loads(data_file.read())
 
 for sites in data['websites']['site']:
