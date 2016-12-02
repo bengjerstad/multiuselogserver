@@ -48,9 +48,9 @@ def connection(hug_cors):
 			logs[thistitle] = thisstat
 	return logs
 	
-@hug.get(examples='')
+@hug.get(examples='type=list')
 @hug.local()
-def hashlist(hug_cors):
+def hashlist(hug_cors,type: hug.types.text):
 	logs = {}
 	dbkeys = ['title','hash']
 	sqlcmd = "SELECT `title`,`hash` FROM ConnectLog WHERE 1"
@@ -59,18 +59,19 @@ def hashlist(hug_cors):
 	titles = {x[0] for x in dbout}
 	for thistitle in titles:
 		for idx,row in enumerate(dbout):
-			if(thistitle == row[0]):
-				if(row[1] != "None"):
-					try:
-						if(row[1] != laststat):
-							thisstat = "Yield"
+			if(row[1] != "None"):
+				if(type == 'list'):
+					if(thistitle == row[0]):
+						try:
+							if(row[1] != laststat):
+								thisstat = "Yield"
+								laststat = row[1]
+								#print(thistitle,laststat,row[1])
+						except:
+							print('ex')
 							laststat = row[1]
-							#print(thistitle,laststat,row[1])
-					except:
-						print('ex')
-						laststat = row[1]
-						thisstat = "Good"
-					logs[thistitle] = thisstat
+							thisstat = "Good"
+						logs[thistitle] = thisstat
 	return logs
 	
 @hug.get(examples='')
