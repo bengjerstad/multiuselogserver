@@ -37,7 +37,7 @@ function rolluplist(){
 	});
 }
 function view(viewtype){
-	$.getJSON("http://"+SERVERIP+"/logserver/"+viewtype+"", function(result){
+	$.getJSON("http://"+SERVERIP+"/logserver/hashlist?type=view", function(result){
 		$("#logview").html("");
 		$("#stattxt").text('Log View received.');
 		link = "<a href='#' onclick=\"clearlog('"+viewtype+"')\">Clear This Log</a>"
