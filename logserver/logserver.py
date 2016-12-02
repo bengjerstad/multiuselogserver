@@ -92,10 +92,10 @@ def rolluplist(hug_cors):
 		logs[thistitle] = 'Good'
 	return logs
 	
-@hug.get(examples='view=hashview')
+@hug.get(examples='title=windowslogger')
 @hug.local()
-def clearthis(hug_cors,view: hug.types.text):
-	sqlcmd = "DELETE FROM ConnectLog WHERE title = '"+view+"'"
+def clearthis(hug_cors,title: hug.types.text):
+	sqlcmd = "DELETE FROM ConnectLog WHERE title = '"+title+"'"
 	print(sqlcmd)
 	dbout = c.execute(sqlcmd)
 	return 1
