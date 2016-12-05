@@ -3,6 +3,6 @@ These files need to be set to run on a timer. check.py is hourly. rollupwinlog.p
 ```
 crontab -e
 
-@daily python 'home/admin/rollupwinlog.py'
-@hourly python 'home/admin/check.py'
+@daily cd /home/admin/ && python3 'home/admin/rollupwinlog.py'
+@hourly cd /home/admin/ && python3 'home/admin/check.py'
 ```
