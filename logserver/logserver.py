@@ -82,6 +82,25 @@ def hashlist(hug_cors,type: hug.types.text):
 
 @hug.get(examples='')
 @hug.local()
+def get_rollup(hug_cors,hug_timer=3):
+	logs = {}
+	dbkeys = ['username','compname','time','stat']
+	
+	#connect ot rollup db file
+	rollup_connconn = sqlite3.connect('usersrollup.db')
+	rollup_c = rollup_connconn.cursor()
+	
+	#get the logs out of the db file
+	dbout = rollup_c.execute("SELECT username,compname,time,stat FROM users WHERE 1")
+	dbout = dbout.fetchall()
+	
+	for idx,row in enumerate(dbout):
+		logs[idx] = dict(zip(dbkeys,row))
+		
+	return logs	
+	
+@hug.get(examples='')
+@hug.local()
 def rolluplist(hug_cors):
 	logs = {}
 	with open('config.json', encoding='utf-8') as data_file:
