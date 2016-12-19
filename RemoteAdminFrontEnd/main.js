@@ -1,23 +1,25 @@
 SERVERIP = '10.24.25.130:8000';
 
 function getconnection(){
-	$.getJSON("http://"+SERVERIP+"/logserver/connection?type=list&title=all", function(result){
+	$.getJSON("http://"+SERVERIP+"/logserver/connection", function(result){
 		$("#main").html('<ul>');
 		$("#stattxt").text('List of connections received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			link = "<a href='#' onclick=\"view('connection','"+username+"')\"><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
+			thisview = "connview";
+			link = "<a href='#' onclick='view(thisview)'><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 			$("#main").append("<li>"+link+"</li>");
 		});
 		$("#main").append("</ul>");
 	});
 }
 function hashlist(){
-	$.getJSON("http://"+SERVERIP+"/logserver/hashlist?type=list", function(result){
+	$.getJSON("http://"+SERVERIP+"/logserver/hashlist", function(result){
 		$("#stattxt").text('List of hash received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			link = "<a href='#' onclick=\"view('hashlist','"+username+"')\"><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
+			thisview = "hashview";
+			link = "<a href='#' onclick='view(thisview)'><img class='mediumimg' src='"+val+".jpg'/>"+username+ "</a>"
 			$("#main").append("<li>"+link+"</li>");
 		});
 		$("#main").append("</ul>");
@@ -35,25 +37,19 @@ function rolluplist(){
 		$("#exlist").append("</ul>");
 	});
 }
-function view(viewtype,title){
-	$.getJSON("http://"+SERVERIP+"/logserver/"+viewtype+"?type=view&title="+title, function(result){
+function view(viewtype){
+	$.getJSON("http://"+SERVERIP+"/logserver/"+viewtype+"", function(result){
 		$("#logview").html("");
 		$("#stattxt").text('Log View received.');
-		link = "<a href='#' onclick=\"clearlog('"+title+"')\">Clear This Log</a>"
-		$("#logview").append("<li>"+link+"</li>");
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			$("#logview").append("<li>"+val+"</li>");
+			link = "<a href='#' >"+val+ "</a>"
+			$("#logview").append("<li>"+link+"</li>");
 		});
 		$("#logview").append("</ul>");
 	});
 }
-function clearlog(view){
-	$.getJSON("http://"+SERVERIP+"/logserver/clearthis?title="+view, function(result){
-		$("#logview").html("");
-		$("#stattxt").text('Cleared the Log.');
-	});
-}
+	
 
 getconnection();
 hashlist();
