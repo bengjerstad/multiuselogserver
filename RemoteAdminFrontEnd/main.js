@@ -41,8 +41,10 @@ function getrollup(){
 		$("#logview").append("<table>");
 		$("#stattxt").text('Rollup Log received.');
 		$.each( result, function( key, val ) {
-			username = key.split(" ")[0];
-			$("#logview").append("<li>"+username+"</li>");
+			$("#logview").append("<tr><td>"+val.username+"</td>");
+			$("#logview").append("<td>"+val.stat+"</td>");
+			$("#logview").append("<td>"+val.compname+"</td>");
+			$("#logview").append("<td>"+val.time+"</td></tr>");
 		});
 		$("#logview").append("</table>");
 	});
