@@ -29,10 +29,22 @@ function rolluplist(){
 		$("#stattxt").text('List of rollups received.');
 		$.each( result, function( key, val ) {
 			username = key.split(" ")[0];
-			link = "<a href='#' >"+username+ "</a>"
+			link = "<a href='#' onclick=\"getrollup('"+username+"')\">"+username+ "</a>"
 			$("#exlist").append("<li>"+link+"</li>");
 		});
 		$("#exlist").append("</ul>");
+	});
+}
+function getrollup(){
+	$.getJSON("http://"+SERVERIP+"/logserver/get_rollup", function(result){
+		$("#logview").html("");
+		$("#logview").append("<table>");
+		$("#stattxt").text('Rollup Log received.');
+		$.each( result, function( key, val ) {
+			username = key.split(" ")[0];
+			$("#logview").append("<li>"+username+"</li>");
+		});
+		$("#logview").append("</table>");
 	});
 }
 function view(viewtype,title){
